@@ -1,0 +1,79 @@
+xml and activity linked through a process called layout inflamation it triggers when activity starts. During Layout Inflamation
+the view defined in xml files are turned or inflated in to kolin view object activity can then draw this onscreen and also
+dynamically modify them
+
+<LinearLayout>                         Layout Inflamation
+  <ImageView                               // var diceImage: ImageView 
+     layout_gravity= "center_horizontal"
+     ...>                                      kotlin view object          then activity draw it on screen                         
+  </ImageView>                                                                      LinearLayout
+  <Button                                  // var roll:Button                           /\
+     android:text= "Roll"                                                      ImageView  Button
+     id="+@id/roll_Button"                R Class
+     ...>                            id roll_button = 0x7fx700
+  </Buttin> 
+<LinearLayout>
+every time we define id for view in xml android studio automatically create integer constant in R class then we can find it with
+finViewById() whic search through the hierarcy and find view for us
+
+class MainActivity : AppCompatActivity() { 
+     override fun onCreate(savedInstanceState: Bundle?){
+              super.onCreate(savedInstanceState)
+              setContentView(R.layout.activity_main) // tell which layout is associated with activity
+     }
+}
+MainActivity extends AppCompatActivity which is subclass of android that gives us access to modern android fetures while 
+providing backward compatibility with older version of android
+Activity do not use constructor for their setup instead series of predefined method are called as part of setup one for eg is
+onCreate() method.
+
+<activity android:name=".MainActivity">
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" /> // they specify which activity to run first
+    </intent-filter>
+</activity>
+
+ViewGroup are responsible for holding multiple views on screen and helping to specify their postiton. 
+eg - LinearLayout, RelativeLayout, ConstraintLayout e.t.c
+
+Context Object allows us to communicate with and get information about current state of android operating system.
+Activity is a subclass of Context so we can use this for context required in Toast
+      Toast.makeText(this, "button clicked", Toast.LENGTH_SHORT).show()
+      
+Gradle is the build tool for android Gradle Andorid Build Tool
+- what device run your app
+- compile to executable
+- dependency management
+- signing app to play store
+- automated tests
+
+when we click on run a series of gradle command compile your source code through dependency and any associated resource into a
+android application package(.apk) - resource, compiled code, androidmanifest, othres
+APK file executable format for distributing android applications
+their are two build file 
+build.gradle(Project)
+build.gradle(Module:app) - a module is folder with source file and resources for discreate piece of functionality for our app
+Repository in gradle is an remote server where external code is downloaded from 
+repository {
+    google()
+    jcenter()
+}
+Dependency in gradle is external code libraries, that a project depends on
+these plugins are needed by gradle to know how to build android and kotlin project
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+application id is the unique identifier for both android and google play used to identify it. It not possible to install to
+apps with same application id on android and similarly to publish on google play
+applicationId "com.teckudos.devappswithkotlin" 
+
+vectorDrawable can scale without lossing quality
+vector drawable support in api level 21 and + in lower api level gradle genrate png files which takes space 
+to support it with minimum api level there is androix comatible library to api level 7
+vectorDrawables.useSupportLibrary = true add to build gradle
+correct layout namespace and replace src to srcCompat
+
+
+  
