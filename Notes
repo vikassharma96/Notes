@@ -35,7 +35,7 @@ onCreate() method.
 </activity>
 
 ViewGroup are responsible for holding multiple views on screen and helping to specify their postiton. 
-eg - LinearLayout, RelativeLayout, ConstraintLayout e.t.c
+eg - LinearLayout, RelativeLayout, ConstraintLayout, Scrollview e.t.c
 
 Context Object allows us to communicate with and get information about current state of android operating system.
 Activity is a subclass of Context so we can use this for context required in Toast
@@ -74,6 +74,65 @@ vector drawable support in api level 21 and + in lower api level gradle genrate 
 to support it with minimum api level there is androix comatible library to api level 7
 vectorDrawables.useSupportLibrary = true add to build gradle
 correct layout namespace and replace src to srcCompat
+
+Density Independent pixel (dp)
+1dp = 1pixels on 160dpi screen
+1dp = 3pixels on 480dpi screen
+Scale independent pixel (sp)
+it is like dp unit but not only scaled by pixel density but also by font size preference that user can set in font settings
+
+<style name="GreenText" parent="@android:style/TextAppearance">
+    <item name="android:textColor">#00FF00</item>
+</style>
+
+below style with backward comaptibility upto api level 14 so there is Appcompat added
+<style name="GreenText" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">#00FF00</item>
+</style>
+
+similarly we can apply theme 
+
+dark theme - 
+<manifest ... >
+    <application android:theme="@style/Theme.AppCompat" ... >
+    </application>
+</manifest>
+light theme - 
+<manifest ... >
+    <application ... >
+        <activity android:theme="@style/Theme.AppCompat.Light" ... >
+        </activity>
+    </application>
+</manifest>
+Beginning with Android 5.0 (API level 21) and Android Support Library v22.1, you can also specify the android:theme attribute 
+to a view in your layout file. This modifies the theme for that view and any child views, which is useful for altering theme 
+color palettes in a specific portion of your interface.
+
+Dynamic string
+<string name="my_xml_string">My sister %1$s is %2$d years old.</string>
+String myString = "Mary"; int myInt = 12;
+String formatted = getString(R.string.my_xml_string, myString, myInt);
+
+Data binding - 
+with findviewbyid getting reference system or android has to search hierarchy for us and find view at runtime for deep view
+it will take time and slow down to avoid this we have technique or pattern called databinding.
+which allows us to connect a layout to activity or fragment at compile time. compiler creates an helper class called binding 
+class when activity created then we can access view through this generated binding class
+The big idea about data binding is to create an object that connects/maps/binds two pieces of distant information 
+together at compile time, so that you don't have to look for it at runtime.
+The object that surfaces these bindings to you is called the Binding object. It is created by the compiler
+
+<LinearLayout>
+ <TextView
+ id="+@id/text"
+ .....>
+ </TextView>                  Binding Object                         binding.text      
+ <ImageView                   or binding class                       binding.image
+ id="+@id/image">                 
+ </ImageView>
+<LinearLayout> 
+
+
 
 
   
